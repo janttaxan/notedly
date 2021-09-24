@@ -1,12 +1,11 @@
-import { Button } from 'components/common/Button/Button';
+import { GlobalStyle } from 'components/common/GlobalStyle';
+import { Pages } from 'pages';
 
 function App() {
-  const apiUrl = process.env.REACT_APP_API || '';
-
-  console.log('API_URL', apiUrl);
   return (
-    <div className='App'>
-      <Button />
+    <div>
+      <GlobalStyle />
+      <Pages />
     </div>
   );
 }
