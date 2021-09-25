@@ -45,15 +45,21 @@ export const Navigation = () => {
     <Nav>
       <NavList>
         <li>
-          <span aria-hidden='true' role='img'>🏠</span>
+          <span aria-hidden='true' role='img'>
+            🏠
+          </span>
           <Link to='/'>Главная</Link>
         </li>
         <li>
-          <span aria-hidden='true' role='img'>📓</span>
+          <span aria-hidden='true' role='img'>
+            📓
+          </span>
           <Link to='/mynotes'>Мои заметки</Link>
         </li>
         <li>
-          <span aria-hidden='true' role='img'>🌟</span>
+          <span aria-hidden='true' role='img'>
+            🌟
+          </span>
           <Link to='/favorites'>Избранное</Link>
         </li>
       </NavList>

@@ -32,7 +32,9 @@ const LogoText = styled.h1`
 export const Header = () => {
   return (
     <HeaderBar>
-      <LogoIcon><Logo /></LogoIcon>
+      <LogoIcon>
+        <Logo />
+      </LogoIcon>
       <LogoText>Notedly</LogoText>
     </HeaderBar>
   );
