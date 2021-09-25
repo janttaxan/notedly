@@ -35,7 +35,6 @@ const Main = styled.main`
   }
 `;
 
-
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
