@@ -1,10 +1,22 @@
 import { gql } from '@apollo/client';
 
+import { Note as NoteType, NoteFeed, User } from 'core/entities';
+
+// ************************************** IS_LOGGED_IN
+export interface IsLoggedInData {
+  isLoggedIn: boolean;
+}
+
 export const IS_LOGGED_IN = gql`
   query {
     isLoggedIn @client
   }
 `;
+
+// ************************************** GET_ME
+export interface GetMeData {
+  me: User;
+}
 
 export const GET_ME = gql`
   query me {
@@ -16,6 +28,16 @@ export const GET_ME = gql`
     }
   }
 `;
+
+// ************************************** GET_NOTES
+export interface GetNotesData {
+  noteFeed: NoteFeed;
+}
+
+export interface GetNotesVars {
+  cursor: string;
+  limit: number;
+}
 
 export const GET_NOTES = gql`
   query NoteFeed($cursor: String, $limit: Int) {
@@ -37,6 +59,11 @@ export const GET_NOTES = gql`
   }
 `;
 
+// ************************************** GET_MY_NOTES
+export interface GetMyNotesData {
+  me: User;
+}
+
 export const GET_MY_NOTES = gql`
   query me {
     me {
@@ -57,6 +84,11 @@ export const GET_MY_NOTES = gql`
   }
 `;
 
+// ************************************** GET_MY_FAVORITES
+export interface GetMyFavoritesData {
+  me: User;
+}
+
 export const GET_MY_FAVORITES = gql`
   query me {
     me {
@@ -76,6 +108,15 @@ export const GET_MY_FAVORITES = gql`
     }
   }
 `;
+
+// ************************************** GET_NOTE
+export interface GetNoteData {
+  note: NoteType;
+}
+
+export interface GetNoteVars {
+  noteId: string;
+}
 
 export const GET_NOTE = gql`
   query note($noteId: ID!) {

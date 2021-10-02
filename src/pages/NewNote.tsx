@@ -2,19 +2,10 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 
-import { NEW_NOTE } from 'gql/mutation';
-import { Note } from 'core/entities';
+import { NEW_NOTE, NewNoteData, NewNoteVars } from 'gql/mutation';
 
 import { NoteForm } from 'components/Forms/NoteForm';
 import { GET_MY_NOTES, GET_NOTES } from 'gql/query';
-
-interface NewNoteData {
-  newNote: Note;
-}
-
-interface NewNoteVars {
-  noteContent: string;
-}
 
 export const NewNote = () => {
   useEffect(() => {

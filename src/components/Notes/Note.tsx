@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 
 import { Note as NoteType } from 'core/entities';
-import { IS_LOGGED_IN } from 'gql/query';
+import { IS_LOGGED_IN, IsLoggedInData } from 'gql/query';
 
 import { NoteUser } from 'components/Notes/NoteUser';
 
@@ -34,7 +34,7 @@ interface NoteProps {
 }
 
 export const Note = ({ note, isPreview = false }: NoteProps) => {
-  const { data, loading, error } = useQuery(IS_LOGGED_IN);
+  const { data, loading, error } = useQuery<IsLoggedInData>(IS_LOGGED_IN);
 
   if (loading) {
     return <p>Загрузка...</p>;
@@ -56,7 +56,7 @@ export const Note = ({ note, isPreview = false }: NoteProps) => {
             {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true, locale: ru })}
           </span>
         </MetaInfo>
-        {data.isLoggedIn && (
+        {data && data.isLoggedIn && (
           <UserActions>
             <NoteUser note={note} />
           </UserActions>

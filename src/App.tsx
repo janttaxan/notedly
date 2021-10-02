@@ -2,11 +2,12 @@ import { ApolloClient, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import { cache } from 'cashe';
+import { IS_LOGGED_IN, IsLoggedInData } from 'gql/query';
 import { typeDefs } from 'core/entities/typeDefs';
 
 import { GlobalStyle } from 'components/common/GlobalStyle';
+
 import { Pages } from 'pages';
-import { IS_LOGGED_IN } from 'gql/query';
 
 const uri = process.env.REACT_APP_API || '';
 const httpLink = createHttpLink({ uri });
@@ -25,7 +26,7 @@ const client = new ApolloClient({
 });
 
 client.onResetStore(async () =>
-  cache.writeQuery<{ isLoggedIn: boolean }>({
+  cache.writeQuery<IsLoggedInData>({
     query: IS_LOGGED_IN,
     data: {
       isLoggedIn: !!localStorage.getItem('token')

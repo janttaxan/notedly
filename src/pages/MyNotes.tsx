@@ -1,21 +1,16 @@
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
-import { GET_MY_NOTES } from 'gql/query';
-import { User } from 'core/entities';
+import { GET_MY_NOTES, GetMyNotesData } from 'gql/query';
 
 import { NoteFeed } from 'components/Notes/NoteFeed';
-
-interface MyNotesData {
-  me: User;
-}
 
 export const MyNotes = () => {
   useEffect(() => {
     document.title = 'Notedly: Мои заметки';
   }, []);
 
-  const { data, loading, error } = useQuery<MyNotesData>(GET_MY_NOTES);
+  const { data, loading, error } = useQuery<GetMyNotesData>(GET_MY_NOTES);
 
   if (loading) {
     return <p>Загрузка...</p>;

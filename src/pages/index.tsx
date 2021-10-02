@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { useQuery } from '@apollo/client';
 
-import { IS_LOGGED_IN } from 'gql/query';
+import { IS_LOGGED_IN, IsLoggedInData } from 'gql/query';
 
 import { Layout } from 'components/Layout/Layout';
 
@@ -40,7 +40,7 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ component: Component, path }: PrivateRouteProps) => {
-  const { data, loading, error } = useQuery<{ isLoggedIn: boolean }>(IS_LOGGED_IN);
+  const { data, loading, error } = useQuery<IsLoggedInData>(IS_LOGGED_IN);
 
   if (loading) {
     return <p>Загрузка..</p>;
