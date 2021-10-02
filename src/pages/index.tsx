@@ -6,9 +6,11 @@ import { IS_LOGGED_IN } from 'gql/query';
 
 import { Layout } from 'components/Layout/Layout';
 
+import { EditNote } from 'pages/EditNote';
 import { Favorites } from 'pages/Favorites';
 import { Home } from 'pages/Home';
 import { MyNotes } from 'pages/MyNotes';
+import { NewNote } from 'pages/NewNote';
 import { NotePage } from 'pages/Note';
 import { SignIn } from 'pages/SignIn';
 import { SignUp } from 'pages/SignUp';
@@ -24,6 +26,8 @@ export const Pages = () => {
           <Route path='/note/:id' component={NotePage} />
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
+          <PrivateRoute path='/new' component={NewNote} />
+          <PrivateRoute path='/edit/:id' component={EditNote} />
         </>
       </Layout>
     </Router>

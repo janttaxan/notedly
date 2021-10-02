@@ -1,10 +1,11 @@
-import { gql, useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { IS_LOGGED_IN } from 'gql/query';
+import { SIGNUP_USER } from 'gql/mutation';
 
-import { UserForm } from 'components/UserForm';
+import { UserForm } from 'components/Forms/UserForm';
 
 interface SignUpData {
   signUp: string;
@@ -15,12 +16,6 @@ interface SignUpVars {
   email: string;
   password: string;
 }
-
-const SIGNUP_USER = gql`
-  mutation signUp($username: String!, $email: String!, $password: String!) {
-    signUp(username: $username, email: $email, password: $password)
-  }
-`;
 
 export const SignUp = () => {
   useEffect(() => {

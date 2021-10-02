@@ -67,6 +67,12 @@ export const Navigation = () => {
           </Icon>
           <Link to='/favorites'>Избранное</Link>
         </li>
+        <li>
+          <Icon aria-hidden='true' role='img'>
+            ➕
+          </Icon>
+          <Link to='/new'>Новая заметка</Link>
+        </li>
       </NavList>
     </Nav>
   );

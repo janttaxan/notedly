@@ -27,11 +27,19 @@ export const typeDefs = gql`
   }
 
   type Query {
-    note(noteId: ID!): Note
     noteFeed(cursor: String, limit: Int): NoteFeed!
+    notes: [Note]!
+    note(noteId: ID!): Note!
+    users: [User!]!
+    user(username: String!): User
+    me: User
   }
 
   type Mutation {
+    newNote(noteContent: String!): Note!
+    updateNote(noteId: ID!, noteContent: String!): Note!
+    deleteNote(noteId: ID!): Boolean!
+    toggleFavorite(noteId: ID!): Note!
     signUp(username: String!, email: String!, password: String!): String!
     signIn(username: String, email: String, password: String!): String!
   }
