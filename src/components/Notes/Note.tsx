@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
@@ -34,11 +34,13 @@ export const Note = ({ note, isPreview = false }: NoteProps) => {
     <StyledNote>
       <MetaData>
         <MetaInfo>
-          <img src={note.author.avatar} alt='{note.author.username} avatar' height='50px' />
+          <img src={note.author.avatar} alt={`${note.author.username} avatar`} height='50px' />
         </MetaInfo>
         <MetaInfo>
           <em>by</em> {note.author.username} <br />
-          {format(new Date(note.createdAt), 'd MMMM yyyy', { locale: ru })}
+          <span title={new Date(note.createdAt).toLocaleString()}>
+            {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true, locale: ru })}
+          </span>
         </MetaInfo>
         <UserActions>
           <em>Favorites:</em> {note.favoriteCount}

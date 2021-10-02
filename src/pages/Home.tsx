@@ -4,7 +4,7 @@ import { NoteFeed as NoteFeedType } from 'core/entities';
 
 import { Button } from 'components/common/Button';
 import { NoteFeed } from 'components/Notes/NoteFeed';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 interface NoteFeedData {
   noteFeed: NoteFeedType;
@@ -36,6 +36,10 @@ const GET_NOTES = gql`
 `;
 
 export const Home = () => {
+  useEffect(() => {
+    document.title = 'Notedly';
+  }, []);
+
   const { data, loading, error, fetchMore } = useQuery<NoteFeedData, NoteFeedVars>(GET_NOTES, {
     variables: { cursor: '', limit: 20 }
   });
