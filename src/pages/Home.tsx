@@ -1,46 +1,17 @@
-import { useQuery, gql } from '@apollo/client';
+import { useCallback, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 
-import { NoteFeed as NoteFeedType } from 'core/entities';
+import { GET_NOTES, GetNotesData, GetNotesVars } from 'gql/query';
 
 import { Button } from 'components/common/Button';
 import { NoteFeed } from 'components/Notes/NoteFeed';
-import { useCallback, useEffect } from 'react';
-
-interface NoteFeedData {
-  noteFeed: NoteFeedType;
-}
-
-interface NoteFeedVars {
-  cursor: string;
-  limit: number;
-}
-
-const GET_NOTES = gql`
-  query NoteFeed($cursor: String, $limit: Int) {
-    noteFeed(cursor: $cursor, limit: $limit) {
-      cursor
-      hasNextPage
-      notes {
-        id
-        createdAt
-        content
-        favoriteCount
-        author {
-          username
-          id
-          avatar
-        }
-      }
-    }
-  }
-`;
 
 export const Home = () => {
   useEffect(() => {
     document.title = 'Notedly';
   }, []);
 
-  const { data, loading, error, fetchMore } = useQuery<NoteFeedData, NoteFeedVars>(GET_NOTES, {
+  const { data, loading, error, fetchMore } = useQuery<GetNotesData, GetNotesVars>(GET_NOTES, {
     variables: { cursor: '', limit: 20 }
   });
 

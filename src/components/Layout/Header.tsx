@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCallback } from 'react';
 
-import { IS_LOGGED_IN } from 'gql/query';
+import { IS_LOGGED_IN, IsLoggedInData } from 'gql/query';
 
 import { ButtonAsLink } from 'components/common/ButtonAsLink';
 import { ReactComponent as Logo } from 'components/common/icons/Logo.svg';
@@ -44,12 +44,12 @@ const UserState = styled.div`
 export const Header = () => {
   const history = useHistory();
   const client = useApolloClient();
-  const { data } = useQuery<{ isLoggedIn: boolean }>(IS_LOGGED_IN);
+  const { data } = useQuery<IsLoggedInData>(IS_LOGGED_IN);
 
   const handleLogOut = useCallback(async () => {
     localStorage.removeItem('token');
     await client.resetStore();
-    client.writeQuery<{ isLoggedIn: boolean }>({
+    client.writeQuery<IsLoggedInData>({
       query: IS_LOGGED_IN,
       data: {
         isLoggedIn: false

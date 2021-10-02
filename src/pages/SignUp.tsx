@@ -1,26 +1,11 @@
-import { gql, useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { IS_LOGGED_IN } from 'gql/query';
+import { IS_LOGGED_IN, IsLoggedInData } from 'gql/query';
+import { SIGNUP_USER, SignUpUserData, SignUpUserVars } from 'gql/mutation';
 
-import { UserForm } from 'components/UserForm';
-
-interface SignUpData {
-  signUp: string;
-}
-
-interface SignUpVars {
-  username: string;
-  email: string;
-  password: string;
-}
-
-const SIGNUP_USER = gql`
-  mutation signUp($username: String!, $email: String!, $password: String!) {
-    signUp(username: $username, email: $email, password: $password)
-  }
-`;
+import { UserForm } from 'components/Forms/UserForm';
 
 export const SignUp = () => {
   useEffect(() => {
@@ -35,10 +20,10 @@ export const SignUp = () => {
     password: ''
   });
 
-  const [signUp, { loading, error }] = useMutation<SignUpData, SignUpVars>(SIGNUP_USER, {
+  const [signUp, { loading, error }] = useMutation<SignUpUserData, SignUpUserVars>(SIGNUP_USER, {
     onCompleted: (data) => {
       localStorage.setItem('token', data.signUp);
-      client.writeQuery<{ isLoggedIn: boolean }>({
+      client.writeQuery<IsLoggedInData>({
         query: IS_LOGGED_IN,
         data: {
           isLoggedIn: true

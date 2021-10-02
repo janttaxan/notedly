@@ -1,35 +1,18 @@
 import { useParams } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
-import { Note as NoteType } from 'core/entities';
+import { GET_NOTE, GetNoteData, GetNoteVars } from 'gql/query';
+
 import { Note } from 'components/Notes/Note';
-
-interface NotePageData {
-  note: NoteType;
-}
-
-interface NotePageVars {
-  noteId: string;
-}
-
-const GET_NOTE = gql`
-  query note($noteId: ID!) {
-    note(noteId: $noteId) {
-      createdAt
-      content
-      favoriteCount
-      author {
-        username
-        id
-        avatar
-      }
-    }
-  }
-`;
+import { useEffect } from 'react';
 
 export const NotePage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, loading, error } = useQuery<NotePageData, NotePageVars>(GET_NOTE, { variables: { noteId: id } });
+  const { data, loading, error } = useQuery<GetNoteData, GetNoteVars>(GET_NOTE, { variables: { noteId: id } });
+
+  useEffect(() => {
+    document.title = `Notedly: ${data?.note.content.substr(0, 20)}`;
+  }, [data?.note.content]);
 
   if (loading) {
     return <p>Загрузка...</p>;
