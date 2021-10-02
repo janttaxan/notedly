@@ -40,26 +40,31 @@ const NavList = styled.ul`
   }
 `;
 
+const Icon = styled.span`
+  display: inline-block;
+  margin-right: 8px;
+`;
+
 export const Navigation = () => {
   return (
     <Nav>
       <NavList>
         <li>
-          <span aria-hidden='true' role='img'>
+          <Icon aria-hidden='true' role='img'>
             🏠
-          </span>
+          </Icon>
           <Link to='/'>Главная</Link>
         </li>
         <li>
-          <span aria-hidden='true' role='img'>
+          <Icon aria-hidden='true' role='img'>
             📓
-          </span>
+          </Icon>
           <Link to='/mynotes'>Мои заметки</Link>
         </li>
         <li>
-          <span aria-hidden='true' role='img'>
+          <Icon aria-hidden='true' role='img'>
             🌟
-          </span>
+          </Icon>
           <Link to='/favorites'>Избранное</Link>
         </li>
       </NavList>

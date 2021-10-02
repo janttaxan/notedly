@@ -30,4 +30,17 @@ export const typeDefs = gql`
     note(noteId: ID!): Note
     noteFeed(cursor: String, limit: Int): NoteFeed!
   }
+
+  type Mutation {
+    signUp(username: String!, email: String!, password: String!): String!
+    signIn(username: String, email: String, password: String!): String!
+  }
+`;
+
+export const clientSchemaExtensions = gql`
+  directive @client on FIELD
+
+  extend type Query {
+    isLoggedIn: Boolean
+  }
 `;
