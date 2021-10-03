@@ -20,10 +20,6 @@ export const SignIn = () => {
     password: ''
   });
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-
   const [signIn, { loading, error }] = useMutation<SignInUserData, SignInUserVars>(SIGNIN_USER, {
     onCompleted: (data) => {
       localStorage.setItem('token', data.signIn);
