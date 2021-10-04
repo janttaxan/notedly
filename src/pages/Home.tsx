@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
+import Button from '@mui/material/Button';
+
 import { GET_NOTES, GetNotesData, GetNotesVars } from 'gql/query';
 
-import { Button } from 'components/common/Button';
 import { NoteFeed } from 'components/Notes/NoteFeed';
 
 export const Home = () => {
@@ -43,7 +44,11 @@ export const Home = () => {
   return (
     <>
       {data && <NoteFeed notes={data.noteFeed.notes} />}
-      {data && data.noteFeed.hasNextPage && <Button onClick={handleClick}>Загрузить еще</Button>}
+      {data && data.noteFeed.hasNextPage && (
+        <Button variant='contained' color='primary' onClick={handleClick}>
+          Загрузить еще
+        </Button>
+      )}
     </>
   );
 };

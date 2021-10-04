@@ -1,48 +1,42 @@
-import { ReactChild } from 'react';
-import styled from 'styled-components';
+import { ReactChild, useCallback } from 'react';
+
+import Box from '@mui/material/Box';
 
 import { Header } from 'components/Layout/Header';
 import { Navigation } from 'components/Layout/Navigation';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { theme } from 'components/common/Theme';
 
 interface LayoutProps {
   children: ReactChild;
 }
 
-const Wrapper = styled.div`
-  @media (min-width: 700px) {
-    display: flex;
-    top: 56px;
-    position: relative;
-    height: calc(100% - 64px);
-    width: 100%;
-    flex: auto;
-    flex-direction: column;
-  }
-`;
-
-const Main = styled.main`
-  position: fixed;
-  height: calc(100% - 185px);
-  width: 100%;
-  padding: 1em;
-  overflow-y: auto;
-
-  @media (min-width: 700px) {
-    flex: 1;
-    margin-left: 220px;
-    height: calc(100% - 56px);
-    width: calc(100% - 220px);
-  }
-`;
-
 export const Layout = ({ children }: LayoutProps) => {
+  const mediumView = useMediaQuery(theme.breakpoints.up('md'));
+  const smallView = useMediaQuery(theme.breakpoints.up('sm'));
+
+  const getPadding = useCallback(() => {
+    if (mediumView) {
+      return '88px 24px 24px 264px';
+    }
+    if (smallView) {
+      return '88px 24px';
+    }
+    return '80px 16px';
+  }, [mediumView, smallView]);
+
   return (
     <>
       <Header />
-      <Wrapper>
-        <Navigation />
-        <Main>{children}</Main>
-      </Wrapper>
+      <Navigation />
+      <Box
+        component='main'
+        sx={{
+          padding: getPadding()
+        }}
+      >
+        {children}
+      </Box>
     </>
   );
 };

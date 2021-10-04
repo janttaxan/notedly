@@ -1,45 +1,14 @@
 import { useApolloClient, useQuery } from '@apollo/client';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { useCallback } from 'react';
 
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
 import { IS_LOGGED_IN, IsLoggedInData } from 'gql/query';
-
-import { ButtonAsLink } from 'components/common/ButtonAsLink';
-import { ReactComponent as Logo } from 'components/common/icons/Logo.svg';
-
-const HeaderBar = styled.header`
-  width: 100%;
-  padding: 0.5em 1em;
-  max-height: 56px;
-  display: flex;
-  position: fixed;
-  align-items: center;
-  background-color: #fff;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
-  z-index: 1;
-`;
-
-const LogoIcon = styled.div`
-  width: 40px;
-  height: 40px;
-  margin-right: 16px;
-
-  & svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const LogoText = styled.h1`
-  margin: 0;
-  padding: 0;
-  display: inline;
-`;
-
-const UserState = styled.div`
-  margin-left: auto;
-`;
 
 export const Header = () => {
   const history = useHistory();
@@ -59,20 +28,23 @@ export const Header = () => {
   }, [client, history]);
 
   return (
-    <HeaderBar>
-      <LogoIcon>
-        <Logo />
-      </LogoIcon>
-      <LogoText>Notedly</LogoText>
-      <UserState>
-        {data?.isLoggedIn ? (
-          <ButtonAsLink onClick={handleLogOut}>Выйти</ButtonAsLink>
-        ) : (
-          <p>
-            <Link to='/signin'>Войдите</Link> или <Link to='/signup'>Зарегистрируйтесь</Link>
-          </p>
-        )}
-      </UserState>
-    </HeaderBar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position='fixed' color='secondary' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Toolbar>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+            Notedly
+          </Typography>
+          {data?.isLoggedIn ? (
+            <Button color='inherit' onClick={handleLogOut}>
+              Выйти
+            </Button>
+          ) : (
+            <Button component={Link} to='/signin' color='inherit'>
+              Войти
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
