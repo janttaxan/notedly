@@ -24,7 +24,7 @@ export const NewNote = () => {
       sx={{
         '& > :not(style)': { m: 1 },
         position: 'fixed',
-        bottom: matches ? 100 : 56,
+        bottom: matches ? 64 : 56,
         right: matches ? 40 : 0
       }}
     >
