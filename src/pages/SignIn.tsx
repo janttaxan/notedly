@@ -32,6 +32,7 @@ export const SignIn = () => {
       setTimeout(() => {
         if (location.state && location.state.from) {
           history.push(location.state.from);
+          window.location.reload();
         } else {
           history.push('/');
         }
